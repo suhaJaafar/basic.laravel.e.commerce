@@ -1,0 +1,185 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Api Documentation",
+		"description": "Laravel autogenerate swagger",
+		"termsOfService": "http:\/\/swagger.io\/terms\/",
+		"contact": {
+			"email": "hussein4alaa@gmail.com"
+		},
+		"license": {
+			"name": "Github",
+			"url": "https:\/\/github.com\/hussein4alaa"
+		},
+		"version": "3.0.7"
+	},
+	"servers": [
+		{
+			"url": "http:\/\/localhost:8000",
+			"description": "localhost"
+		}
+	],
+	"components": {
+		"tags": [
+			{
+				"name": "User",
+				"description": null
+			}
+		],
+		"paths": {
+			"\/api\/user": {
+				"get": {
+					"tags": ["User"],
+					"summary": "user",
+					"description": "",
+					"operationId": "_api_user_GET|HEAD",
+					"parameters": [],
+					"responses": {
+						"200": {
+							"description": "Successful Operation"
+						},
+						"404": {
+							"description": "Not Found"
+						}
+					}
+				}
+			},
+			"\/api\/user\/post": {
+				"post": {
+					"tags": ["User"],
+					"summary": "user",
+					"description": "",
+					"operationId": "_api_user_post_POST",
+					"parameters": [],
+					"responses": {
+						"200": {
+							"description": "Successful Operation"
+						},
+						"422": {
+							"description": "Validation Issues"
+						}
+					},
+					"requestBody": {
+						"description": "",
+						"content": {
+							"multipart\/form-data": {
+								"schema": {
+									"$ref": "#\/components\/schemas\/UserPost"
+								}
+							},
+							"application\/json": {
+								"schema": {
+									"$ref": "#\/components\/schemas\/UserPost"
+								}
+							}
+						},
+						"required": true
+					}
+				}
+			}
+		},
+		"schemas": {
+			"UserPost": {
+				"required": ["name", "email", "password"],
+				"type": "object",
+				"properties": {
+					"name": {
+						"required": "true",
+						"type": "string",
+						"maximum": "255"
+					},
+					"email": {
+						"required": "true",
+						"type": "string",
+						"format": "email",
+						"maximum": "255",
+						"unique": "true"
+					},
+					"password": {
+						"required": "true",
+						"type": "string",
+						"minimum": "8"
+					},
+					"password_confirmation": {
+						"required": "true",
+						"type": "string",
+						"minimum": "8"
+					}
+				},
+				"xml": {
+					"name": "userpost"
+				}
+			}
+		},
+		"securitySchemes": {
+			"authorization": {
+				"type": "apiKey",
+				"name": "authorization",
+				"in": "header"
+			},
+			"apiKey1": {
+				"type": "apiKey",
+				"name": "key1",
+				"in": "query"
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "User",
+			"description": null
+		}
+	],
+	"paths": {
+		"\/api\/user": {
+			"get": {
+				"tags": ["User"],
+				"summary": "user",
+				"description": "",
+				"operationId": "_api_user_GET|HEAD",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful Operation"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"\/api\/user\/post": {
+			"post": {
+				"tags": ["User"],
+				"summary": "user",
+				"description": "",
+				"operationId": "_api_user_post_POST",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Successful Operation"
+					},
+					"422": {
+						"description": "Validation Issues"
+					}
+				},
+				"requestBody": {
+					"description": "",
+					"content": {
+						"multipart\/form-data": {
+							"schema": {
+								"$ref": "#\/components\/schemas\/UserPost"
+							}
+						},
+						"application\/json": {
+							"schema": {
+								"$ref": "#\/components\/schemas\/UserPost"
+							}
+						}
+					},
+					"required": true
+				}
+			}
+		}
+	}
+}
