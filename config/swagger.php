@@ -79,6 +79,7 @@ return [
     "auth_middlewares" => [
         "auth",
         "auth:api",
+        "auth:sanctum",
     ],
 
     /*
@@ -173,15 +174,10 @@ return [
     |
     */
     "security_schemes" => [
-        "authorization" => [
-            "type" => "apiKey",
-            "name" => "authorization",
-            "in" => "header"
-        ],
-        "apiKey1" => [
-            "type" => "apiKey",
-            "name" => "key1",
-            "in" => "query"
+        "sanctum" => [
+            "type" => "http",
+            "scheme" => "bearer",
+            "bearerFormat" => "token",
         ]
     ],
 
