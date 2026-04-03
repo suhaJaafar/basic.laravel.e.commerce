@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function all()
     {
-        $returned_data = Product::all();
+        $returned_data = Product::with('orders')->paginate(10);
         return ProductResource::collection($returned_data);
     }
 

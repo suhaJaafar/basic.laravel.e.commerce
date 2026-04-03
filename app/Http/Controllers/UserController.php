@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function get()
     {
-        $returned_data = User::with('products')->get();
+        $returned_data = User::with('products')->with('orders')->paginate(10);
         return UserResource::collection($returned_data);
     }
 
