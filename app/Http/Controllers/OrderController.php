@@ -16,10 +16,16 @@ class OrderController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+        $products = Product::whereIn('id', $request->product_ids)->get();
+        logger()->info($products);
+        logger()->info('test');
+        if ($products->count() !== count($request->product_ids)) {
+            return response()->json(['message' => 'One or more products not found'], 404);
+        }
         // Calculate total price
         $totalPrice = 0;
         foreach($request->product_ids as $productId) {
-            $product = Product::find($productId);
+            $product = $products->where('id', $productId)->first();
             if ($product) {
                 $totalPrice += $product->price;
             }

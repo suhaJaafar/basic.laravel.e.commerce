@@ -17,16 +17,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', [UserController::class, 'get']);
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/user/post', [UserController::class, 'post']);
+    Route::get('/user', [UserController::class, 'get']);
 
-    Route::get('/products/all', [ProductController::class, 'all']);
-    Route::get('/products/{userId}', [ProductController::class, 'index']);
-    Route::post('/products/create', [ProductController::class, 'create']);
-
+});
+Route::middleware(['auth:sanctum', 'role:admin,customer'])->group(function () {
     Route::get('/orders/all', [OrderController::class, 'all']);
     Route::get('/orders/{userId}', [OrderController::class, 'index']);
     Route::post('/orders/create', [OrderController::class, 'create']);
+});
+
+Route::middleware(['auth:sanctum', 'role:admin,provider'])->group(function () {
+    Route::get('/products/all', [ProductController::class, 'all']);
+    Route::get('/products/{userId}', [ProductController::class, 'index']);
+    Route::post('/products/create', [ProductController::class, 'create']);
 });
 
