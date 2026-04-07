@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();;
             $table->decimal('price', 8, 2);
             $table->integer('stock');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
